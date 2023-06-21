@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {styled} from 'styled-components/native';
 import Options from '~components/Options';
 import {DataOpions} from '~constants/Type';
-import {MaxSize} from '~constants/constants';
 import fonts from '~theme/fonts';
-
+import {LayoutRectangle} from 'react-native';
 interface props {
   title?: string;
   data?: DataOpions[];
@@ -25,13 +24,20 @@ const Component: React.FC<props> = ({
     },
   ],
 }) => {
+  const [layoutContainer, setLayoutContainer] = useState<LayoutRectangle>();
   return (
-    <Container>
+    <Container
+      onLayout={event => {
+        setLayoutContainer(event.nativeEvent.layout);
+        console.log(event.nativeEvent.layout);
+      }}>
       <Title>{title}</Title>
       <GroupOptions>
         <RenderItem
           data={data}
-          renderItem={({item}: {item: DataOpions}) => <Options item={item} />}
+          renderItem={({item}: {item?: DataOpions}) => (
+            <Options maxWidth={layoutContainer} item={item} />
+          )}
           numColumns={2}
           horizontal={false}
         />
@@ -48,7 +54,6 @@ const RenderItem = styled.FlatList``;
 const GroupOptions = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  width: ${MaxSize.WIDTH * 0.9}px;
 `;
 const Title = styled(fonts.CerebriSansBoldSize16)``;
 export default Component;

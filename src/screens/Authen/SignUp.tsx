@@ -8,8 +8,6 @@ import CheckBox from '~components/CheckBox';
 import colors from '~theme/colors';
 import fonts from '~theme/fonts';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Platform} from 'react-native';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {navigate} from '~navigations/index';
 const SignUp = () => {
   const [typePassword, setTypePassword] = useState(true);
@@ -40,11 +38,6 @@ const SignUp = () => {
       <KeyboardAwareScrollView
         enableOnAndroid
         extraScrollHeight={20}
-        extraHeight={
-          Platform.OS === 'ios'
-            ? 260 + getStatusBarHeight()
-            : getStatusBarHeight()
-        }
         keyboardShouldPersistTaps="handled"
         bounces={false}
         showsVerticalScrollIndicator={false}>
@@ -95,33 +88,27 @@ const Container = styled.View`
   flex: 1;
 `;
 const ContainerForm = styled.View`
-  margin-horizontal: 10px;
-  margin-top: 15px;
   align-items: center;
+  padding-horizontal: 10px;
+  padding-vertical: 10px;
 `;
 const TextShow = styled(fonts.CerebriSansMediumSize16)`
   color: ${colors.FIREBRICK};
 `;
 const ButtonShow = styled.TouchableOpacity``;
 const ButtonBaseStyled = styled(ButtonBase)`
-  width: 90%;
   align-self: center;
-  margin-top: 20px;
 `;
 const ContainerChecked = styled.View`
   flex-direction: row;
-  margin-horizontal: 10px;
   align-items: flex-start;
   justify-content: center;
-  margin-vertical: 10px;
 `;
 const DescChecked = styled(fonts.CerebriSansRegularSize14)`
   line-height: 20px;
-  margin-left: 10px;
 `;
 const Forgot = styled(fonts.CerebriSansBoldSize18)`
   align-self: center;
-  margin-vertical: 10px;
   color: ${colors.FIREBRICK};
 `;
 const ButtonRouterGroup = styled.View``;

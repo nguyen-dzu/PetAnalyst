@@ -61,7 +61,9 @@ const Component: React.FC<props> = ({
     </Container>
   );
 };
-const Container = styled.View``;
+const Container = styled.View`
+  width: 100%;
+`;
 const InputItem = styled.View<{
   backgroundColor: string;
   borderWidth: number;
