@@ -14,7 +14,6 @@ interface Props {
 const RowItem: React.FC<Props> = ({
   name,
   onPress,
-  paddingLeft = 68,
   fontSize = 14,
   spaceItem = 10,
 }) => {
@@ -22,26 +21,20 @@ const RowItem: React.FC<Props> = ({
     typeof onPress(name);
   };
   return (
-    <Container
-      onPress={_onPress}
-      paddingLeft={paddingLeft}
-      spaceItem={spaceItem}>
+    <Container onPress={_onPress} spaceItem={spaceItem}>
       <Name fontSize={fontSize}>{name}</Name>
     </Container>
   );
 };
 
 const Container = styled.TouchableOpacity<{
-  paddingLeft: number;
   spaceItem: number;
 }>`
   padding-vertical: ${props => (props.spaceItem ? props.spaceItem : 10)}px;
   width: 100%;
-  padding-left: ${props => props.paddingLeft}px;
-  padding-right: ${props => props.paddingLeft}px;
   justify-content: center;
   background-color: red;
-  margin: 5px;
+  margin-vertical: 5px;
 `;
 
 const Name = styled(fonts.CerebriSansRegularSize14)`

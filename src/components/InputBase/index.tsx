@@ -1,7 +1,6 @@
 import React from 'react';
 import {KeyboardTypeOptions} from 'react-native';
 import {styled} from 'styled-components/native';
-import {MaxSize} from '~constants/constants';
 import colors from '~theme/colors';
 import fonts from '~theme/fonts';
 
@@ -62,10 +61,7 @@ const Component: React.FC<props> = ({
     </Container>
   );
 };
-const Container = styled.View`
-  width: ${MaxSize.WIDTH};
-  padding: 13px;
-`;
+const Container = styled.View``;
 const InputItem = styled.View<{
   backgroundColor: string;
   borderWidth: number;

@@ -1,12 +1,12 @@
 import React from 'react';
 import {styled} from 'styled-components/native';
-import {MaxSize} from '~constants/constants';
 import colors from '~theme/colors';
 import fonts from '~theme/fonts';
 import InputBase from '~components/InputBase';
 import SelectGroup from '~components/SelectGroup';
 import Compobox from '~components/Compobox';
 import {DataOpions} from '~constants/Type';
+import {MaxSize} from '~constants/constants';
 const FillProfile = (item: any) => {
   const data: DataOpions[] = [
     {
@@ -27,6 +27,7 @@ const FillProfile = (item: any) => {
     },
   ];
   const DataDropDown = ['1', '2', '3'];
+
   return (
     <Container key={item.key}>
       <PickImage>
@@ -48,10 +49,9 @@ const FillProfile = (item: any) => {
   );
 };
 const Container = styled.ScrollView`
-  flex: 1;
   margin-top: 10px;
-  width: ${MaxSize.WIDTH * 0.93}px;
-  height: ${MaxSize.HEIGHT}px;
+  width: ${MaxSize.WIDTH}px;
+  padding-horizontal: 10px;
 `;
 
 const PickImage = styled.TouchableOpacity`

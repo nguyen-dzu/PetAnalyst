@@ -15,8 +15,10 @@ const InfoProfile = () => {
     <Container>
       <Header textRight="Skip" title="Pet Profile" />
       <Title>1 or 2</Title>
-      <ContainerContent>
+      <ContainerProress>
         <ProgressBar percentedValue={50} />
+      </ContainerProress>
+      <ContainerContent>
         <TabScreens
           data={[{key: 1}, {key: 2}]}
           renderItem={({item}: any) => renderTab(item)}
@@ -30,13 +32,13 @@ const InfoProfile = () => {
 };
 
 const Container = styled.View`
-  flex: 1;
   background-color: ${colors.WHITE};
 `;
-
+const ContainerProress = styled.View`
+  padding-horizontal: 10px;
+`;
 const ContainerContent = styled.View`
   margin-top: 10px;
-  width: ${MaxSize.WIDTH * 0.93}px;
   align-self: center;
 `;
 
@@ -46,6 +48,6 @@ const Title = styled(fonts.CerebriSansRegularSize16)`
 `;
 
 const TabScreens = styled.FlatList`
-  height: ${MaxSize.HEIGHT}PX;
+  height: ${MaxSize.HEIGHT}px;
 `;
 export default InfoProfile;

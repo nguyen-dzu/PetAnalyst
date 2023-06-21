@@ -5,6 +5,7 @@ import BaseButton from '~components/ButtonBase';
 import colors from '~theme/colors';
 import fonts from '~theme/fonts';
 import {navigate} from '~navigations/index';
+import {MaxSize} from '~constants/constants';
 const Logo = require('~assets/Images/Logo.png');
 const Pets = require('~assets/Images/animals.png');
 
@@ -39,10 +40,10 @@ const PetProfile = () => {
 };
 
 const Container = styled.View`
-  flex: 1;
   justify-content: space-between;
   padding: 10px;
   background-color: ${colors.WHITE};
+  width: ${MaxSize.WIDTH}px;
 `;
 
 const ContainerContent = styled.View`

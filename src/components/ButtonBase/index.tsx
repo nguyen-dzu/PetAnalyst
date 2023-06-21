@@ -36,7 +36,7 @@ const Component: React.FC<Props> = ({
   textColor = `${colors.WHITE}`,
   onPress,
   activeOpacity = 0.6,
-  ...order
+  ...other
 }) => {
   return (
     <Container
@@ -44,7 +44,7 @@ const Component: React.FC<Props> = ({
       height={height}
       marginRight={mRight}
       marginLeft={mLeft}
-      {...order}>
+      {...other}>
       <Touchable
         backgroundColor={disabled ? backgroundColorDisabled : backgroundColor}
         borderWidth={borderWidth}
@@ -71,6 +71,7 @@ const Container = styled.View<{
   margin-right: ${props => props.marginRight ?? 10}px;
   margin-left: ${props => props.marginLeft ?? 10}px;
 `;
+
 const Touchable = styled.TouchableOpacity<{
   backgroundColor: string;
   borderWidth: number;
