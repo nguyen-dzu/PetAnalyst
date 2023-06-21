@@ -23,7 +23,7 @@ const Options: React.FC<props> = ({
       maxWidth={maxWidth?.width ?? 0}
       borderColor={borderColor}
       height={height}>
-      <LableOptions>{item.lable ?? ''}</LableOptions>
+      <LableOptions>{item?.lable ?? ''}</LableOptions>
     </TapOptions>
   );
 };
