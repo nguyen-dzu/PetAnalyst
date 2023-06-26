@@ -6,23 +6,27 @@ import fonts from '~theme/fonts';
 import {LayoutRectangle} from 'react-native';
 
 interface props {
-  borderColor?: string;
+  index?: number;
   height?: number;
   item?: DataOpions;
   maxWidth?: LayoutRectangle;
+  selected: boolean;
+  setSelectedItem: (index?: number) => void;
 }
 const Options: React.FC<props> = ({
   item,
-  borderColor = colors.SILVER_CHALICE,
   height = 40,
   maxWidth,
+  selected = false,
+  setSelectedItem,
+  index,
 }) => {
-  console.log(maxWidth);
   return (
     <TapOptions
       maxWidth={maxWidth?.width ?? 0}
-      borderColor={borderColor}
-      height={height}>
+      borderColor={selected ? colors.FIREBRICK : colors.SILVER_CHALICE}
+      height={height}
+      onPress={() => setSelectedItem(index)}>
       <LableOptions>{item?.lable ?? ''}</LableOptions>
     </TapOptions>
   );

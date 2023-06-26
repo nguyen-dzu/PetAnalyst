@@ -5,7 +5,6 @@ import BaseButton from '~components/ButtonBase';
 import colors from '~theme/colors';
 import fonts from '~theme/fonts';
 import {navigate} from '~navigations/index';
-import {MaxSize} from '~constants/constants';
 const Logo = require('~assets/Images/Logo.png');
 const Pets = require('~assets/Images/animals.png');
 
@@ -28,28 +27,28 @@ const PetProfile = () => {
           This give you a more personalized experience, tailored to your pets’
           needs.
         </Desc>
+        <BaseButton
+          title="Start"
+          backgroundColor={colors.FIREBRICK}
+          borderRadius={5}
+          onPress={() => goOnSetupProfile()}
+        />
       </ContainerContent>
-      <BaseButton
-        title="Start"
-        backgroundColor={colors.FIREBRICK}
-        borderRadius={5}
-        onPress={() => goOnSetupProfile()}
-      />
     </Container>
   );
 };
 
-const Container = styled.View`
+const Container = styled.SafeAreaView`
   justify-content: space-between;
-  padding: 10px;
   background-color: ${colors.WHITE};
-  width: ${MaxSize.WIDTH}px;
+  flex: 1;
 `;
 
 const ContainerContent = styled.View`
   margin-top: 10px;
   align-items: center;
   padding-horizontal: 5px;
+  padding-vertical: 10px;
 `;
 
 const ImagesLogo = styled.Image``;

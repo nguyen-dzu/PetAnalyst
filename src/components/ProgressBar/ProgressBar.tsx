@@ -14,12 +14,12 @@ const ProgressBar: React.FC<props> = ({percentedValue = 0}) => {
   useEffect(() => {
     increProgress();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [percentedValue]);
   const increProgress = () => {
     // Will change progressWidth value to 1 in 5 seconds
     Animated.timing(progressWidth, {
       toValue: percentedValue,
-      duration: 2000,
+      duration: 1000,
       useNativeDriver: false,
     }).start();
   };

@@ -4,7 +4,6 @@ import colors from '~theme/colors';
 import fonts from '~theme/fonts';
 interface Props {
   title?: string;
-  width?: number;
   height?: number;
   mRight?: number;
   mLeft?: number;
@@ -22,10 +21,6 @@ interface Props {
 
 const Component: React.FC<Props> = ({
   title = 'Button',
-  width,
-  height = 50,
-  mRight = 0,
-  mLeft = 0,
   backgroundColor = `${colors.BLACK}`,
   borderWidth = 0,
   borderColor = `${colors.WHITE}`,
@@ -36,42 +31,22 @@ const Component: React.FC<Props> = ({
   textColor = `${colors.WHITE}`,
   onPress,
   activeOpacity = 0.6,
-  ...other
 }) => {
   return (
-    <Container
-      width={width}
-      height={height}
-      marginRight={mRight}
-      marginLeft={mLeft}
-      {...other}>
-      <Touchable
-        backgroundColor={disabled ? backgroundColorDisabled : backgroundColor}
-        borderWidth={borderWidth}
-        borderColor={borderColor}
-        borderRadius={borderRadius}
-        disabled={disabled}
-        onPress={onPress}
-        activeOpacity={activeOpacity}>
-        <Title textColor={textColor} fontFamily={fontFamily}>
-          {title}
-        </Title>
-      </Touchable>
-    </Container>
+    <Touchable
+      backgroundColor={disabled ? backgroundColorDisabled : backgroundColor}
+      borderWidth={borderWidth}
+      borderColor={borderColor}
+      borderRadius={borderRadius}
+      disabled={disabled}
+      onPress={onPress}
+      activeOpacity={activeOpacity}>
+      <Title textColor={textColor} fontFamily={fontFamily}>
+        {title}
+      </Title>
+    </Touchable>
   );
 };
-const Container = styled.View<{
-  width: any;
-  height: number;
-  marginRight: number;
-  marginLeft: number;
-}>`
-  width: ${props => (props.width ? props.width + 'px' : '100%')};
-  height: ${props => props.height}px;
-  margin-right: ${props => props.marginRight ?? 10}px;
-  margin-left: ${props => props.marginLeft ?? 10}px;
-`;
-
 const Touchable = styled.TouchableOpacity<{
   backgroundColor: string;
   borderWidth: number;
@@ -86,7 +61,8 @@ const Touchable = styled.TouchableOpacity<{
   border-width: ${props => props.borderWidth}px;
   border-color: ${props => props.borderColor};
   border-radius: ${props => props.borderRadius}px;
-  height: 100%;
+  height: 48px;
+  width: 100%;
 `;
 
 const Title = styled(fonts.CerebriSansBoldSize18)<{

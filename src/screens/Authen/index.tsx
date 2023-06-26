@@ -4,6 +4,7 @@ import fonts from '~theme/fonts';
 import ButtonBase from '~components/ButtonBase';
 import colors from '~theme/colors';
 import {navigate} from '~navigations/index';
+import {MaxSize} from '~constants/constants';
 const logo = require('~assets/Images/Logo.png');
 interface Props {}
 const AuthenScreens: React.FC<Props> = () => {
@@ -47,9 +48,11 @@ const ContainerLogo = styled.View`
   top: 10%;
 `;
 const ContainerButton = styled.View`
-  width: 90%;
   flex-direction: column;
   align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: ${MaxSize.WIDTH}px;
 `;
 const LoginHere = styled(fonts.CerebriSansMediumSize16)`
   color: ${colors.FIREBRICK};

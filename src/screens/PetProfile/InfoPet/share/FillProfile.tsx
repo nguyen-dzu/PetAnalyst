@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {styled} from 'styled-components/native';
 import colors from '~theme/colors';
 import fonts from '~theme/fonts';
@@ -27,9 +27,11 @@ const FillProfile = (item: any) => {
     },
   ];
   const DataDropDown = ['1', '2', '3'];
+  const [selectedGender, setSelectedGender] = useState<number>();
+  const [selectedType, setSelectedType] = useState<number>();
 
   return (
-    <Container key={item.key}>
+    <ContainerContent key={item.key}>
       <PickImage>
         <Upload>Add Photo</Upload>
       </PickImage>
@@ -42,13 +44,27 @@ const FillProfile = (item: any) => {
         backgroundColor={colors.PLATINUM}
       />
 
-      <SelectGroup title="Pet Gender" />
-      <SelectGroup data={data} title="Pet Type" />
+      <SelectGroup
+        selected={selectedGender}
+        setSelectedItem={(index?: number) => {
+          setSelectedGender(index);
+        }}
+        title="Pet Gender"
+      />
+      <SelectGroup
+        selected={selectedType}
+        setSelectedItem={(index?: number) => {
+          setSelectedType(index);
+        }}
+        data={data}
+        title="Pet Type"
+      />
       <Compobox data={DataDropDown} title="Breed" />
-    </Container>
+    </ContainerContent>
   );
 };
-const Container = styled.ScrollView`
+
+const ContainerContent = styled.ScrollView`
   margin-top: 10px;
   width: ${MaxSize.WIDTH}px;
   padding-horizontal: 10px;

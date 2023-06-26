@@ -10,6 +10,8 @@ interface props {
   borderColor?: string;
   width?: number;
   height?: number;
+  selected?: number;
+  setSelectedItem: (index?: number) => void;
 }
 const Component: React.FC<props> = ({
   title = 'Select Options',
@@ -23,20 +25,28 @@ const Component: React.FC<props> = ({
       value: 'Female',
     },
   ],
+  selected,
+  setSelectedItem,
 }) => {
   const [layoutContainer, setLayoutContainer] = useState<LayoutRectangle>();
+
   return (
     <Container
       onLayout={event => {
         setLayoutContainer(event.nativeEvent.layout);
-        console.log(event.nativeEvent.layout);
       }}>
       <Title>{title}</Title>
       <GroupOptions>
         <RenderItem
           data={data}
-          renderItem={({item}: {item?: DataOpions}) => (
-            <Options maxWidth={layoutContainer} item={item} />
+          renderItem={({item, index}: {item: DataOpions; index: number}) => (
+            <Options
+              index={index}
+              maxWidth={layoutContainer}
+              selected={(selected ?? 0) === index}
+              setSelectedItem={setSelectedItem}
+              item={item}
+            />
           )}
           numColumns={2}
           horizontal={false}

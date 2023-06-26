@@ -47,12 +47,13 @@
       "~components/*": ["components/*"],
       // "~services/*": [ "services/*"],
       "~screens/*": ["screens/*"],
-      // "~store/*": [ "store/*"],
       // "~actionTypes/*": [ "store/actionTypes/*"],
-      // "~reducers/*": [ "store/reducers/*"],
-      // "~sagas/*": [ "store/sagas/*"],
+      "~sagas/*": ["store/sagas/*"],
       "~navigations/*": ["navigations/*"],
-      "~locales/*": ["locales/*"]
+      "~locales/*": ["locales/*"],
+      "~store/*": ["store/*"],
+      "~hooks/*": ["hooks/*"],
+      "~redux/*": ["store/redux/*"]
     } /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */,
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     "typeRoots": [

@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -9,7 +10,9 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {navigationRef} from '~navigations/index';
 
 import MainStack from '~navigations/MainStack';
-
+import {Provider} from 'react-redux';
+import {persistor, store} from '~store';
+import {PersistGate} from 'redux-persist/integration/react';
 function RootComponent(): JSX.Element {
   return (
     <NavigationContainer ref={navigationRef}>
@@ -21,6 +24,12 @@ function RootComponent(): JSX.Element {
 }
 
 function App(): JSX.Element {
-  return <RootComponent />;
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <RootComponent />
+      </PersistGate>
+    </Provider>
+  );
 }
 export default App;

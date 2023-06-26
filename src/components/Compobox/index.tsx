@@ -44,7 +44,6 @@ const Component: React.FC<props> = ({
     <Container
       onLayout={event => {
         setLayoutContainer(event.nativeEvent.layout);
-        console.log(event.nativeEvent.layout);
       }}>
       <Title>{title}</Title>
       <ContentView onPress={() => onPressItem()}>

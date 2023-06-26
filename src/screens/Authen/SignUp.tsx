@@ -111,6 +111,9 @@ const Forgot = styled(fonts.CerebriSansBoldSize18)`
   align-self: center;
   color: ${colors.FIREBRICK};
 `;
-const ButtonRouterGroup = styled.View``;
+const ButtonRouterGroup = styled.View`
+  margin-bottom: 10px;
+  margin-horizontal: 10px;
+`;
 
 export default SignUp;
