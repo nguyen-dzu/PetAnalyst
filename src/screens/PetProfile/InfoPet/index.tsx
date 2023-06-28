@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, memo} from 'react';
 import {styled} from 'styled-components/native';
 import Header from '~components/Header';
 import {ProgressBar} from '~components/index';
@@ -7,6 +7,8 @@ import FillProfile from './share/FillProfile';
 import colors from '~theme/colors';
 import ButtonBase from '~components/ButtonBase';
 import {MaxSize} from '~constants/constants';
+import HealthCondition from './share/HealthCondition';
+import {navigateReset} from '~navigations/index';
 
 const InfoProfile = () => {
   const [nextTab, setNextTab] = useState(false);
@@ -25,12 +27,20 @@ const InfoProfile = () => {
     index,
   });
   const onChangeTap = () => {
-    setNextTab(!nextTab);
-    let index = 1;
-    flatListRef?.current?.scrollToIndex({animated: true, index: index});
+    if (indexTab == 1) {
+      setNextTab(!nextTab);
+      let index = 1;
+      flatListRef?.current?.scrollToIndex({animated: true, index: index});
+    } else {
+      navigateReset('RootStack');
+    }
   };
   const renderTab = (item: any) => {
-    return <FillProfile item={item} />;
+    if (item.key == 1) {
+      return <FillProfile item={item} />;
+    } else {
+      return <HealthCondition />;
+    }
   };
   return (
     <Container>
@@ -83,4 +93,4 @@ const Title = styled(fonts.CerebriSansRegularSize16)`
 `;
 
 const TabScreens = styled.FlatList``;
-export default InfoProfile;
+export default memo(InfoProfile);

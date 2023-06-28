@@ -1,19 +1,19 @@
 import axios, {AxiosResponse, AxiosRequestConfig, AxiosError} from 'axios';
-import moment from 'moment-timezone';
 export const rapidApiKey = '96191cad6emsh052d12666af54c3p1d2720jsn8ae6dd9c656f';
 export const rapidAPIHost = 'dog-breeds2.p.rapidapi.com';
 export enum AcceptType {
   json = 'application/json',
   formData = 'multipart/form-data',
   urlencode = 'application/x-www-form-urlencoded',
-  rapidApiKey = '57dfbf9d6dmsh34cc6ed0d1de8fep1bd656jsn5dccd13cfd47',
-  rapidAPIHost = 'dog-breeds2.p.rapidapi.com',
+  'X-RapidAPI-Key' = '57dfbf9d6dmsh34cc6ed0d1de8fep1bd656jsn5dccd13cfd47',
+  'X-RapidAPI-Host' = 'dog-breeds2.p.rapidapi.com',
 }
 
 const defaultHeader = {
   Accept: AcceptType.json,
   'Content-Type': AcceptType.json,
-  Timezone: moment.tz.guess(),
+  'X-RapidAPI-Key': AcceptType['X-RapidAPI-Key'],
+  'X-RapidAPI-Host': AcceptType['X-RapidAPI-Host'],
 };
 
 const instance = axios.create({
@@ -27,12 +27,10 @@ const instance = axios.create({
       status !== 406
     );
   },
-  timeout: 4000,
 });
 
 instance.interceptors.response.use(
   function (response: AxiosResponse) {
-    console.log(response);
     return Promise.resolve(response);
   },
   function (error: AxiosError) {
@@ -48,20 +46,13 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   },
 );
-
 export class apiClient {
   config: AxiosRequestConfig;
   headers: any;
-
-  constructor(key?: string, host?: string) {
-    const optionRapit = {
-      key: key,
-      host: host,
-    };
+  constructor() {
     this.config = {};
     this.headers = {
       ...defaultHeader,
-      ...optionRapit,
     };
   }
 

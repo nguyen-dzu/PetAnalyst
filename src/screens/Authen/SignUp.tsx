@@ -25,6 +25,7 @@ const SignUp = () => {
       </ButtonShow>
     );
   };
+
   const goToSignIn = () => {
     navigate('SignInScreen');
   };

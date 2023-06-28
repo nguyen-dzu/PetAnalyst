@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, memo} from 'react';
 import {styled} from 'styled-components/native';
 import colors from '~theme/colors';
 import fonts from '~theme/fonts';
@@ -7,7 +7,14 @@ import SelectGroup from '~components/SelectGroup';
 import Compobox from '~components/Compobox';
 import {DataOpions} from '~constants/Type';
 import {MaxSize} from '~constants/constants';
+import {useDispatch, useSelector} from 'react-redux';
+import {getListDogBreed} from '~store/redux/dogs/selector';
+import {getListDogBreeds} from '~store/redux/dogs/actions';
+// import axios from 'axios';
 const FillProfile = (item: any) => {
+  const dispatch = useDispatch();
+  const listBreedDog = useSelector(getListDogBreed);
+
   const data: DataOpions[] = [
     {
       lable: 'Dog',
@@ -26,10 +33,27 @@ const FillProfile = (item: any) => {
       value: 'Rabbit',
     },
   ];
-  const DataDropDown = ['1', '2', '3'];
   const [selectedGender, setSelectedGender] = useState<number>();
   const [selectedType, setSelectedType] = useState<number>();
-
+  useEffect(() => {
+    dispatch(getListDogBreeds());
+  }, [dispatch]);
+  // const options = {
+  //   method: 'GET',
+  //   url: 'https://dog-breeds2.p.rapidapi.com/dog_breeds',
+  //   headers: {
+  //     'X-RapidAPI-Key': '57dfbf9d6dmsh34cc6ed0d1de8fep1bd656jsn5dccd13cfd47',
+  //     'X-RapidAPI-Host': 'dog-breeds2.p.rapidapi.com',
+  //   },
+  // };
+  // useEffect(() => {
+  //   const fetchTest = async () => {
+  //     const response: any = await axios.request(options);
+  //     const data = response.data;
+  //     console.log(data);
+  //   };
+  //   fetchTest();
+  // });
   return (
     <ContainerContent key={item.key}>
       <PickImage>
@@ -59,7 +83,14 @@ const FillProfile = (item: any) => {
         data={data}
         title="Pet Type"
       />
-      <Compobox data={DataDropDown} title="Breed" />
+      <Compobox
+        data={
+          listBreedDog?.map(item => {
+            return `${item.breed}`;
+          }) ?? ['']
+        }
+        title="Breed"
+      />
     </ContainerContent>
   );
 };
@@ -82,4 +113,4 @@ const PickImage = styled.TouchableOpacity`
 `;
 
 const Upload = styled(fonts.CerebriSansRegularSize12)``;
-export default FillProfile;
+export default memo(FillProfile);

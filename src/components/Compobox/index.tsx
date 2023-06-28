@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {styled} from 'styled-components/native';
 import fonts from '~theme/fonts';
 import colors from '~theme/colors';
@@ -8,23 +8,29 @@ import {LayoutRectangle} from 'react-native';
 import {MaxSize} from '~constants/constants';
 interface props {
   title?: string;
-  lableSelected?: string;
   data: string[];
+  labelSelected?: string;
+  setLabelSelected?: (labelSelected: string) => void;
 }
 const Component: React.FC<props> = ({
   title = 'Compobox',
-  lableSelected = 'Select options',
   data,
+  labelSelected = '',
+  setLabelSelected = () => {},
 }) => {
   const [isFocus, setIsFocus] = useState(false);
+  const [visibleData, setVisibleData] = useState<string[]>([]);
   const [layoutContainer, setLayoutContainer] = useState<LayoutRectangle>();
   const onPressItem = () => {
     setIsFocus(!isFocus);
   };
-
+  useEffect(() => {
+    // Hiển thị 5 phần tử đầu tiên ban đầu
+    setVisibleData(data.slice(0, 5));
+  }, [data]);
   const _onPress = (name: string) => {
     setIsFocus(false);
-    console.log(name);
+    setLabelSelected(name);
     // setSelected(true);
     // console.log('Selected Item', isSelected);
   };
@@ -40,6 +46,18 @@ const Component: React.FC<props> = ({
       return false;
     }
   };
+  const handleLoadMore = () => {
+    const currentLength = visibleData.length;
+    const nextLength = currentLength + 5;
+
+    // Kiểm tra xem có còn đủ phần tử để tải hay không
+    if (nextLength <= data.length) {
+      setVisibleData([
+        ...visibleData,
+        ...data.slice(currentLength, nextLength),
+      ]);
+    }
+  };
   return (
     <Container
       onLayout={event => {
@@ -47,14 +65,23 @@ const Component: React.FC<props> = ({
       }}>
       <Title>{title}</Title>
       <ContentView onPress={() => onPressItem()}>
-        <TextValue>{lableSelected}</TextValue>
+        <TextValue>{labelSelected}</TextValue>
         <Icon name="chevron-down" size={24} color={colors.GRAY_08} />
       </ContentView>
       {isFocus && (
         <DropView
           isCanShowDropDown={isCanShowDropDown()}
-          layoutContainer={layoutContainer}>
-          {data?.map((item, index) => {
+          layoutContainer={layoutContainer}
+          onScroll={event => {
+            const {layoutMeasurement, contentOffset, contentSize} =
+              event.nativeEvent;
+            const isEndReached =
+              layoutMeasurement.height + contentOffset.y >= contentSize.height;
+            if (isEndReached) {
+              handleLoadMore();
+            }
+          }}>
+          {visibleData.map((item, index) => {
             return <RowItem name={item} key={index} onPress={_onPress} />;
           })}
         </DropView>

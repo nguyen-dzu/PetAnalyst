@@ -19,6 +19,7 @@ interface props {
   title?: string;
   secureTextEntry?: boolean;
   placeholderTextColor?: string;
+  onPressIn?: () => void;
 }
 const Component: React.FC<props> = ({
   placeholder = 'Text Input',
@@ -35,6 +36,7 @@ const Component: React.FC<props> = ({
   title = '',
   secureTextEntry = false,
   placeholderTextColor = colors.BLACK,
+  onPressIn,
   ...props
 }) => {
   return (
@@ -55,6 +57,7 @@ const Component: React.FC<props> = ({
           multiline={multiline}
           editable={editable}
           secureTextEntry={secureTextEntry}
+          onPressIn={onPressIn}
         />
         {rightIcon}
       </InputItem>

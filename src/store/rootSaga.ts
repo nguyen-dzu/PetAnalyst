@@ -1,4 +1,5 @@
-import {all} from 'redux-saga/effects';
+import {fork} from 'typed-redux-saga';
+import dogs from '~redux/dogs/saga';
 export default function* rootSaga() {
-  yield all([]);
+  yield* fork(dogs);
 }

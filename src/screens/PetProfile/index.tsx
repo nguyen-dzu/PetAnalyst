@@ -12,6 +12,7 @@ const PetProfile = () => {
   const goOnSetupProfile = () => {
     navigate('InfoProfile');
   };
+
   return (
     <Container>
       <Header

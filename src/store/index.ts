@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AnyAction, configureStore, MiddlewareArray} from '@reduxjs/toolkit';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import {persistReducer, persistStore, PersistConfig} from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import createSagaMiddleware from 'redux-saga';
@@ -20,7 +20,7 @@ const persistConfig: PersistConfig<ReducerType> = {
   version: 1,
   storage: AsyncStorage,
   timeout: undefined,
-  blacklist: ['add', 'application'],
+  blacklist: ['add', 'application', 'dogsBreeds'],
   // blacklist: [] as ReducerNameEnum[] as string[],
   // https://github.com/rt2zz/redux-persist#state-reconciler
   // https://blog.bam.tech/developer-news/redux-persist-how-it-works-and-how-to-change-the-structure-of-your-persisted-store
@@ -40,9 +40,9 @@ const middlewareArray = new MiddlewareArray().concat(
   sagaMiddleware,
 );
 
-if (__DEV__) {
-  middlewareArray.push(logger);
-}
+// if (__DEV__) {
+//   middlewareArray.push(logger);
+// }
 
 export const store = configureStore({
   reducer: persistedReducer,

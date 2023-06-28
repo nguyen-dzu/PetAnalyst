@@ -12,13 +12,20 @@ import fonts from '~theme/fonts';
 import {navigateReset} from '~navigations/index';
 const SignIn = () => {
   const [typePassword, setTypePassword] = useState(true);
+  const [statusPassword, setStatusPass] = useState('show');
   const changePassword = () => {
     setTypePassword(!typePassword);
+    if (typePassword == false) {
+      setStatusPass('show');
+    } else {
+      setStatusPass('hide');
+    }
   };
+
   const IconRight = () => {
     return (
       <ButtonShow onPress={() => changePassword()}>
-        <TextShow>Show</TextShow>
+        <TextShow>{statusPassword}</TextShow>
       </ButtonShow>
     );
   };

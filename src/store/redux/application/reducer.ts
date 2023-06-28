@@ -1,16 +1,21 @@
 // src/features/todo/todoSlice.js
 import {createSlice} from '@reduxjs/toolkit';
 
-import type {RootState} from '../../index';
-// Define a type for the slice state
-
+type key_host = {
+  key: string;
+  host: string;
+};
 interface SliceState {
   isLoading?: boolean;
+  key_host: key_host;
 }
-
 // Define the initial state using that type
 const initialState = {
   isLoading: false,
+  key_host: {
+    key: '',
+    host: '',
+  },
 } as SliceState;
 
 export const Slice = createSlice({
@@ -20,13 +25,9 @@ export const Slice = createSlice({
     setLoading: (state: SliceState, {payload}: {payload: boolean}) => {
       state.isLoading = payload;
     },
+    setKey_host: (state: SliceState, {payload}: {payload: key_host}) => {
+      state.key_host = payload;
+    },
   },
 });
-// actions
-export const {setLoading} = Slice.actions;
-
-// selectors
-export const loadingSelector = (state: RootState) =>
-  state.application.isLoading;
-
 export default Slice.reducer;

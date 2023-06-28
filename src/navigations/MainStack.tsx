@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from '~screens/Splash';
 import AuthenStack from './AuthenStack';
 import ProfileStack from './ProfileStack';
+import RootStack from './RootStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,13 @@ const MainStack = () => {
       <Stack.Screen
         name="ProfileStack"
         component={ProfileStack}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="RootStack"
+        component={RootStack}
         options={{
           headerShown: false,
         }}

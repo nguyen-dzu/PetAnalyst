@@ -4,6 +4,9 @@ import {combineReducers, Action} from '@reduxjs/toolkit';
 import applicationReducer, {
   Slice as ApplicationSlice,
 } from '~redux/application/reducer';
+import listDogBreedReducer, {
+  Slice as listDogBreedSlice,
+} from '~store/redux/dogs/reducer';
 // const persistMetaConfig = {
 //   key: 'meta',
 //   version: 1,
@@ -16,6 +19,7 @@ import applicationReducer, {
 
 const appReducer = {
   [ApplicationSlice.name]: applicationReducer,
+  [listDogBreedSlice.name]: listDogBreedReducer,
 };
 
 const appCombineReducer = combineReducers(appReducer);

@@ -45,7 +45,7 @@
       "~utils/*": ["utils/*"],
       "~constants/*": ["constants/*"],
       "~components/*": ["components/*"],
-      // "~services/*": [ "services/*"],
+      "~services/*": ["services/*"],
       "~screens/*": ["screens/*"],
       // "~actionTypes/*": [ "store/actionTypes/*"],
       "~sagas/*": ["store/sagas/*"],
