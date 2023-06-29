@@ -4,4 +4,5 @@ import {RootState} from '~store/index';
 export const loadingSelector = (state: RootState) =>
   state.application.isLoading;
 
-export const setKey_host = (state: RootState) => state.application.key_host;
+export const setRappitHost = (state: RootState) =>
+  state.application.rappitApiHost;

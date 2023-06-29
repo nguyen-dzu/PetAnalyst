@@ -4,12 +4,15 @@ import SplashScreen from '~screens/Splash';
 import AuthenStack from './AuthenStack';
 import ProfileStack from './ProfileStack';
 import RootStack from './RootStack';
+import {navigationOptions} from './index';
 
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
   return (
-    <Stack.Navigator initialRouteName="Splash">
+    <Stack.Navigator
+      initialRouteName="Splash"
+      screenOptions={{...navigationOptions}}>
       <Stack.Screen
         name="Splash"
         component={SplashScreen}

@@ -19,6 +19,7 @@ const shades = {
   MUSTARD: '#FFD84E',
   APPLE: '#78B14B',
   PLATINUM: '#E8E8E8',
+  LIGHT_RED: '#FFCFCF',
   alpha: {
     alpha_1: 'FF',
     alpha_09: 'E6',

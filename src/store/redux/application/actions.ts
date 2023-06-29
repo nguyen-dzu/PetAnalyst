@@ -1,3 +1,3 @@
 import {Slice} from './reducer';
 
-export const {setLoading, setKey_host} = Slice.actions;
+export const {setLoading, setRappitHost} = Slice.actions;

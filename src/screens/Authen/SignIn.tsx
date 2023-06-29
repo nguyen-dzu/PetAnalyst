@@ -10,9 +10,12 @@ import {Platform} from 'react-native';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import fonts from '~theme/fonts';
 import {navigateReset} from '~navigations/index';
+import {useDispatch} from 'react-redux';
+import {setRappitHost} from '~store/redux/application/actions';
 const SignIn = () => {
   const [typePassword, setTypePassword] = useState(true);
   const [statusPassword, setStatusPass] = useState('show');
+  const dispatch = useDispatch();
   const changePassword = () => {
     setTypePassword(!typePassword);
     if (typePassword == false) {
@@ -31,6 +34,8 @@ const SignIn = () => {
   };
 
   const goPetProfile = () => {
+    const host = 'dog-breeds2.p.rapidapi.com';
+    dispatch(setRappitHost(host));
     navigateReset('ProfileStack');
   };
   return (

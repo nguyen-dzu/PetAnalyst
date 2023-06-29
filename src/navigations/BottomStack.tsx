@@ -5,7 +5,6 @@ import {styled} from 'styled-components/native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import colors from '~theme/colors';
 import Insights from '~screens/Insights';
-import {MaxSize} from '~constants/constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +15,31 @@ const BottomStack = () => {
       screenOptions={{
         tabBarActiveTintColor: colors.FIREBRICK,
         tabBarInactiveTintColor: colors.GRAY_08,
+        tabBarStyle: {
+          height: 74,
+          //   position: 'absolute',
+          marginBottom: 14,
+          paddingBottom: 0,
+          borderRadius: 30,
+          marginHorizontal: 8,
+          backgroundColor: '#fff',
+          elevation: 4,
+          shadowColor: '#000',
+          shadowOpacity: 0.45,
+          shadowRadius: 2,
+          shadowOffset: {
+            width: 2,
+            height: 2,
+          },
+        },
+        tabBarLabelStyle: [
+          {
+            color: colors.GRAY_03,
+            fontSize: 15,
+            height: 24,
+            marginBottom: 10,
+          },
+        ],
       }}>
       <Tab.Screen
         name="HomePage"
@@ -25,14 +49,11 @@ const BottomStack = () => {
           tabBarIcon: ({color}) => {
             return (
               <ContainerIconTab>
-                <Icon name="Home" color={color} size={24} />
+                <Icon name="home" color={color} size={24} />
               </ContainerIconTab>
             );
           },
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            fontWeight: '600',
-          },
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -43,21 +64,15 @@ const BottomStack = () => {
           tabBarIcon: ({color}) => {
             return (
               <ContainerIconTab>
-                <Icon name="Insights" color={color} size={24} />
+                <Icon name="barschart" color={color} size={24} />
               </ContainerIconTab>
             );
           },
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            fontWeight: '600',
-          },
+          headerShown: false,
         }}
       />
     </Tab.Navigator>
   );
 };
-const ContainerIconTab = styled.View`
-  width: ${MaxSize.WIDTH};
-  height: 50px;
-`;
+const ContainerIconTab = styled.View``;
 export default BottomStack;

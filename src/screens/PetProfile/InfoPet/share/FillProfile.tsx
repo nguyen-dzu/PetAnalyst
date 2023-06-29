@@ -67,7 +67,6 @@ const FillProfile = (item: any) => {
         borderRadius={10}
         backgroundColor={colors.PLATINUM}
       />
-
       <SelectGroup
         selected={selectedGender}
         setSelectedItem={(index?: number) => {

@@ -1,21 +1,14 @@
 // src/features/todo/todoSlice.js
 import {createSlice} from '@reduxjs/toolkit';
 
-type key_host = {
-  key: string;
-  host: string;
-};
 interface SliceState {
   isLoading?: boolean;
-  key_host: key_host;
+  rappitApiHost: string;
 }
 // Define the initial state using that type
 const initialState = {
   isLoading: false,
-  key_host: {
-    key: '',
-    host: '',
-  },
+  rappitApiHost: '',
 } as SliceState;
 
 export const Slice = createSlice({
@@ -25,8 +18,8 @@ export const Slice = createSlice({
     setLoading: (state: SliceState, {payload}: {payload: boolean}) => {
       state.isLoading = payload;
     },
-    setKey_host: (state: SliceState, {payload}: {payload: key_host}) => {
-      state.key_host = payload;
+    setRappitHost: (state: SliceState, {payload}: {payload: string}) => {
+      state.rappitApiHost = payload;
     },
   },
 });

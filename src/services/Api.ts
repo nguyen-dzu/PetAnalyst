@@ -6,14 +6,12 @@ export enum AcceptType {
   formData = 'multipart/form-data',
   urlencode = 'application/x-www-form-urlencoded',
   'X-RapidAPI-Key' = '57dfbf9d6dmsh34cc6ed0d1de8fep1bd656jsn5dccd13cfd47',
-  'X-RapidAPI-Host' = 'dog-breeds2.p.rapidapi.com',
 }
 
 const defaultHeader = {
   Accept: AcceptType.json,
   'Content-Type': AcceptType.json,
   'X-RapidAPI-Key': AcceptType['X-RapidAPI-Key'],
-  'X-RapidAPI-Host': AcceptType['X-RapidAPI-Host'],
 };
 
 const instance = axios.create({
@@ -49,10 +47,11 @@ instance.interceptors.request.use(
 export class apiClient {
   config: AxiosRequestConfig;
   headers: any;
-  constructor() {
+  constructor(host?: string) {
     this.config = {};
     this.headers = {
       ...defaultHeader,
+      ['X-RapidAPI-Host']: host,
     };
   }
 
