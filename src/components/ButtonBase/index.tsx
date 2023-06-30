@@ -17,6 +17,9 @@ interface Props {
   textColor?: string;
   onPress?: () => void;
   activeOpacity?: number;
+  width?: number;
+  fontSize?: number;
+  height: number;
 }
 
 const Component: React.FC<Props> = ({
@@ -31,6 +34,9 @@ const Component: React.FC<Props> = ({
   textColor = `${colors.WHITE}`,
   onPress,
   activeOpacity = 0.6,
+  width = 0,
+  fontSize = 12,
+  height = 48,
 }) => {
   return (
     <Touchable
@@ -40,8 +46,10 @@ const Component: React.FC<Props> = ({
       borderRadius={borderRadius}
       disabled={disabled}
       onPress={onPress}
-      activeOpacity={activeOpacity}>
-      <Title textColor={textColor} fontFamily={fontFamily}>
+      activeOpacity={activeOpacity}
+      width={width}
+      height={height}>
+      <Title textColor={textColor} fontFamily={fontFamily} fontSize={fontSize}>
         {title}
       </Title>
     </Touchable>
@@ -53,6 +61,8 @@ const Touchable = styled.TouchableOpacity<{
   borderColor: string;
   borderRadius: number;
   disabled: boolean;
+  width: number;
+  height: number;
 }>`
   flex-direction: row;
   justify-content: center;
@@ -61,13 +71,14 @@ const Touchable = styled.TouchableOpacity<{
   border-width: ${props => props.borderWidth}px;
   border-color: ${props => props.borderColor};
   border-radius: ${props => props.borderRadius}px;
-  height: 48px;
-  width: 100%;
+  height: ${props => props.height}px;
+  width: ${props => (props.width ? props.width + 'px' : '100%')};
 `;
 
 const Title = styled(fonts.CerebriSansBoldSize18)<{
   textColor: string;
   fontFamily: string;
+  fontSize: number;
 }>`
   color: ${props => props.textColor};
   font-family: ${props =>
@@ -76,5 +87,6 @@ const Title = styled(fonts.CerebriSansBoldSize18)<{
       : props.fontFamily === 'Regular'
       ? 'CerebriSansPro-Regular'
       : 'CerebriSansPro-Medium'};
+  font-size: ${props => props.fontSize}px;
 `;
 export default Component;

@@ -20,6 +20,7 @@ const shades = {
   APPLE: '#78B14B',
   PLATINUM: '#E8E8E8',
   LIGHT_RED: '#FFCFCF',
+  CHINESE_RED: '#AD2D14',
   alpha: {
     alpha_1: 'FF',
     alpha_09: 'E6',
@@ -42,6 +43,7 @@ const gray = {
   GRAY_07: '#777777',
   GRAY_08: '#888888',
   GRAY_09: '#999999',
+  GRAY_EF: '#EFEFEF',
   SPANISH_GRAY: '#979797',
   LIGHT_GRAY: '#D5D5D5',
 };

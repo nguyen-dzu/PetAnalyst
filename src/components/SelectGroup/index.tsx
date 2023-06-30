@@ -12,9 +12,18 @@ interface props {
   height?: number;
   selected?: number;
   setSelectedItem: (index?: number) => void;
+  styleOptions?: object;
+  borderColorOptions?: string;
+  borderColorDisable?: string;
+  backgroundColor?: string;
+  backgroundColorDisable?: string;
+  textColor?: string;
+  borderWidth?: number;
+  borderRadius?: number;
+  textColorDisable?: string;
 }
 const Component: React.FC<props> = ({
-  title = 'Select Options',
+  title,
   data = [
     {
       lable: 'Male',
@@ -27,15 +36,22 @@ const Component: React.FC<props> = ({
   ],
   selected,
   setSelectedItem,
+  styleOptions,
+  borderColorOptions,
+  backgroundColor,
+  textColor,
+  borderWidth,
+  borderRadius,
+  textColorDisable,
 }) => {
   const [layoutContainer, setLayoutContainer] = useState<LayoutRectangle>();
 
   return (
     <Container
-      onLayout={event => {
+      onLayout={(event: any) => {
         setLayoutContainer(event.nativeEvent.layout);
       }}>
-      <Title>{title}</Title>
+      {title ? <Title>{title}</Title> : null}
       <GroupOptions>
         <RenderItem
           data={data}
@@ -46,6 +62,13 @@ const Component: React.FC<props> = ({
               selected={(selected ?? 0) === index}
               setSelectedItem={setSelectedItem}
               item={item}
+              style={styleOptions}
+              borderColor={borderColorOptions}
+              backgroundColor={backgroundColor}
+              textColor={textColor}
+              borderWidth={borderWidth}
+              borderRadius={borderRadius}
+              textColorDisable={textColorDisable}
             />
           )}
           numColumns={2}

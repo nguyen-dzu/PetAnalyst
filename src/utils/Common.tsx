@@ -1,30 +1,49 @@
 import moment from 'moment';
-import {
-  BackHandler,
-  Dimensions,
-  NativeModules,
-  Platform,
-} from 'react-native/types';
-import RNFS from 'react-native-fs';
+// import * as types from 'react-native/types';
+// import RNFS from 'react-native-fs';
+export function getFormattedDate(dateString: string) {
+  var date = new Date(dateString);
+  var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var dayOfWeek = days[date.getDay()];
 
-const {ResizeImageModule} = NativeModules;
-export const {width: windowWidth, height: windowHeight} =
-  Dimensions.get('window');
+  var day = date.getDate();
+  var month = date.getMonth() + 1; // Vì tháng được đếm từ 0 đến 11, nên cần cộng thêm 1.
+  var year = date.getFullYear();
 
-//check data null
-export const isNull = (data: any) => {
-  if (data === undefined || data == null || data.length === 0) {
-    return true;
-  } else if (typeof data === 'string') {
-    data = String(data).trim();
-    return data === '';
-  } else if (typeof data === 'object' && data.constructor === Object) {
-    if (Object.keys(data).length === 0) {
-      return true;
-    }
+  return dayOfWeek + ', ' + day + '/' + month + '/' + year;
+}
+
+export function getMonthDates(year: any, month: any) {
+  var dates = [];
+
+  var currentDate = new Date(year, month - 1, 1);
+
+  while (currentDate.getMonth() === month - 1) {
+    dates.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
   }
-  return false;
-};
+
+  return dates;
+}
+
+// const {ResizeImageModule} = types.NativeModules;
+// export const {width: windowWidth, height: windowHeight} =
+//   types.Dimensions.get('window');
+
+// //check data null
+// export const isNull = (data: any) => {
+//   if (data === undefined || data == null || data.length === 0) {
+//     return true;
+//   } else if (typeof data === 'string') {
+//     data = String(data).trim();
+//     return data === '';
+//   } else if (typeof data === 'object' && data.constructor === Object) {
+//     if (Object.keys(data).length === 0) {
+//       return true;
+//     }
+//   }
+//   return false;
+// };
 
 // URL
 export const validURL = (str: string) => {
@@ -309,13 +328,13 @@ export const formatTime = (time: any) => {
 //     });
 // };
 
-export const removeBackAction = () => {
-  const backHandler = BackHandler.addEventListener(
-    'hardwareBackPress',
-    () => true,
-  );
-  return () => backHandler.remove();
-};
+// export const removeBackAction = () => {
+//   const backHandler = types.BackHandler.addEventListener(
+//     'hardwareBackPress',
+//     () => true,
+//   );
+//   return () => backHandler.remove();
+// };
 
 export const getCurrentTime = () => {
   const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
@@ -451,56 +470,56 @@ export const calculatorHeightRatio = (width: number, ratio?: number) => {
 //   );
 // };
 
-export const resizeImage = (listUri: string[], callback: any) => {
-  const {ResizeImageAndroid} = NativeModules;
-  try {
-    if (Platform.OS === 'android') {
-      const arr: String[] = [];
-      listUri.map((uri: String) => {
-        ResizeImageAndroid.resizeImage(uri, (value: String) => {
-          arr.push('file://' + value);
-          if (arr.length === listUri.length) {
-            console.log(listUri, arr);
-            callback(arr);
-          }
-        });
-      });
-    } else {
-      const arr: String[] = [];
-      listUri.map(async (uri: string) => {
-        const convertPHToFile = uri.startsWith('ph://')
-          ? await getAbsolutePath(uri)
-          : uri;
-        ResizeImageModule.resizeImage(convertPHToFile, (uriResize: string) => {
-          arr.push(uriResize);
-          if (arr.length === listUri.length) {
-            callback(arr);
-          }
-        });
-      });
-    }
-  } catch (error) {
-    console.log('error resize image', error);
-    return [];
-  }
-};
+// export const resizeImage = (listUri: string[], callback: any) => {
+//   const {ResizeImageAndroid} = types.NativeModules;
+//   try {
+//     if (types.Platform.OS === 'android') {
+//       const arr: String[] = [];
+//       listUri.map((uri: String) => {
+//         ResizeImageAndroid.resizeImage(uri, (value: String) => {
+//           arr.push('file://' + value);
+//           if (arr.length === listUri.length) {
+//             console.log(listUri, arr);
+//             callback(arr);
+//           }
+//         });
+//       });
+//     } else {
+//       const arr: String[] = [];
+//       listUri.map(async (uri: string) => {
+//         const convertPHToFile = uri.startsWith('ph://')
+//           ? await getAbsolutePath(uri)
+//           : uri;
+//         ResizeImageModule.resizeImage(convertPHToFile, (uriResize: string) => {
+//           arr.push(uriResize);
+//           if (arr.length === listUri.length) {
+//             callback(arr);
+//           }
+//         });
+//       });
+//     }
+//   } catch (error) {
+//     console.log('error resize image', error);
+//     return [];
+//   }
+// };
 
-const getAbsolutePath = async (assetPath: string) => {
-  const destination = `${RNFS.TemporaryDirectoryPath}${Math.random()
-    .toString(36)
-    .substring(7)}.png`;
-  try {
-    let absolutePath = await RNFS.copyAssetsFileIOS(
-      assetPath,
-      destination,
-      0,
-      0,
-    );
-    return 'file://' + absolutePath;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const getAbsolutePath = async (assetPath: string) => {
+//   const destination = `${RNFS.TemporaryDirectoryPath}${Math.random()
+//     .toString(36)
+//     .substring(7)}.png`;
+//   try {
+//     let absolutePath = await RNFS.copyAssetsFileIOS(
+//       assetPath,
+//       destination,
+//       0,
+//       0,
+//     );
+//     return 'file://' + absolutePath;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // const getVersionApp = () => {
 //   return `${require('../../package.json').versionNameProd}(${

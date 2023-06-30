@@ -73,6 +73,7 @@ const FillProfile = (item: any) => {
           setSelectedGender(index);
         }}
         title="Pet Gender"
+        backgroundColor={colors.PLATINUM}
       />
       <SelectGroup
         selected={selectedType}
@@ -81,6 +82,7 @@ const FillProfile = (item: any) => {
         }}
         data={data}
         title="Pet Type"
+        backgroundColor={colors.PLATINUM}
       />
       <Compobox
         data={

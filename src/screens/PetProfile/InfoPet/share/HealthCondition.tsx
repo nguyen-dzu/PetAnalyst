@@ -60,6 +60,7 @@ const HealthCondition = () => {
         }}
         data={data}
         title="Curent Diet"
+        backgroundColor={colors.PLATINUM}
       />
       <Compobox data={preExistingConditions} title="Pre-existing Conditions" />
       <DateTimePicker

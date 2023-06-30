@@ -9,7 +9,6 @@ import ButtonBase from '~components/ButtonBase';
 import {MaxSize} from '~constants/constants';
 import HealthCondition from './share/HealthCondition';
 import {navigateReset} from '~navigations/index';
-
 const InfoProfile = () => {
   const [nextTab, setNextTab] = useState(false);
   const [indexTab, setIndexTab] = useState(1);
@@ -27,7 +26,7 @@ const InfoProfile = () => {
     index,
   });
   const onChangeTap = () => {
-    if (indexTab == 1) {
+    if (indexTab === 1) {
       setNextTab(!nextTab);
       let index = 1;
       flatListRef?.current?.scrollToIndex({animated: true, index: index});
@@ -36,7 +35,7 @@ const InfoProfile = () => {
     }
   };
   const renderTab = (item: any) => {
-    if (item.key == 1) {
+    if (item.key === 1) {
       return <FillProfile item={item} />;
     } else {
       return <HealthCondition />;
@@ -59,6 +58,7 @@ const InfoProfile = () => {
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item: any) => item.key}
           getItemLayout={getItemLayout}
+          scrollEnabled={false}
         />
       </ContainerContent>
       <ContainerButton>
